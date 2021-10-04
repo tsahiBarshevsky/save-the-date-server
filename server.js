@@ -22,19 +22,20 @@ mongoose.connect('mongodb://localhost:27017/save-the-date', {
 app.post('/add-new-medicine', async (req, res) => {
     const openDate = req.body.openDate;
     const usageTime = req.body.usageTime;
-    var openDateMoment = moment(openDate);
+    const endDate = moment(openDate).add(usageTime, "M");
     const newMedicine = new MedicineModel({
         owner: req.body.owner,
         name: req.body.name,
         active: true,
         openDate: req.body.openDate,
-        endDate: openDateMoment.add(usageTime, 'M'),
+        endDate: endDate,
         usageTime: usageTime
     });
     await newMedicine.save();
     console.log(`${req.body.name} added successfully`);
     res.json({
         medicine_id: newMedicine._id,
+        endDate: endDate,
         message: `${req.body.name} added successfully`
     });
 });
