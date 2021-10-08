@@ -23,10 +23,11 @@ app.post('/add-new-medicine', async (req, res) => {
     const openDate = req.body.openDate;
     const usageTime = req.body.usageTime;
     const endDate = moment(openDate).add(usageTime, "M");
+    const active = endDate < moment().set({ hour: 0, minute: 0, second: 0, millisecond: 0 }) ? false : true;
     const newMedicine = new MedicineModel({
         owner: req.body.owner,
         name: req.body.name,
-        active: true,
+        active: active,
         openDate: req.body.openDate,
         endDate: endDate,
         usageTime: usageTime
@@ -36,6 +37,7 @@ app.post('/add-new-medicine', async (req, res) => {
     res.json({
         medicine_id: newMedicine._id,
         endDate: endDate,
+        active: active,
         message: `${req.body.name} added successfully`
     });
 });
