@@ -75,27 +75,6 @@ app.get('/delete-medicine', async (req, res) => {
     );
 });
 
-// Get single medicine
-app.get('/get-single-medicine', async (req, res) => {
-    var id = req.query.id;
-    MedicineModel.findById(id, (err, result) => {
-        if (err) {
-            console.log("Error: " + err);
-            res.send(err);
-        }
-        else {
-            if (!result) {
-                console.log(`Couldn't find a madicine with id ${id}`);
-                res.json({});
-            }
-            else {
-                console.log(`The madicine associated with this id is ${result.name}`);
-                res.json(result);
-            }
-        }
-    });
-});
-
 // Get all user's medicines
 app.get('/get-all-medicines', async (req, res) => {
     var email = req.query.email;
