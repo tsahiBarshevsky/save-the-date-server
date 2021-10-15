@@ -42,34 +42,6 @@ app.post('/add-new-medicine', async (req, res) => {
     });
 });
 
-// Edit medicine
-app.post('/edit-medicine', async (req, res) => {
-    const id = req.query.id;
-    const name = req.body.name;
-    const openDate = req.body.openDate;
-    const usageTime = req.body.usageTime;
-    var openDateMoment = moment(openDate);
-    MedicineModel.findByIdAndUpdate(id,
-        {
-            name: name,
-            active: req.body.active,
-            openDate: req.body.openDate,
-            endDate: openDateMoment.add(usageTime, 'M'),
-            usageTime: usageTime
-        },
-        function (err) {
-            if (err) {
-                console.log(err);
-                res.status(500).send(err);
-            }
-            else {
-                console.log(`${name} edited successfully`);
-                res.json(`${name} edited successfully`);
-            }
-        }
-    );
-});
-
 // Change active status
 app.post('/change-active-status', async (req, res) => {
     var id = req.query.id;
@@ -80,6 +52,8 @@ app.post('/change-active-status', async (req, res) => {
                 console.log(err);
                 res.status(500).send(err);
             }
+            else
+                res.json("Update successfully");
         }
     );
 });
