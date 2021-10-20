@@ -92,6 +92,10 @@ app.get('/get-all-medicines', async (req, res) => {
     );
 });
 
+app.get('/check', async (req, res) => {
+    res.json("check ok");
+});
+
 app.listen(port, () => {
     console.log(`Listening at port ${port}`);
 });
