@@ -12,7 +12,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/save-the-date', {
+mongoose.connect('mongodb+srv://tsahiBarshavsky:databaseadmin@savethedate.xbuab.mongodb.net/savethedate?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useFindAndModify: false
